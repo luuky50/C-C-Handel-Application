@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\CanvasScript.cs" />
     <Compile Include="Assets\Scripts\EventBaseClass.cs" />
     <Compile Include="Assets\Scripts\ExternalFiles.cs" />
+    <Compile Include="Assets\Scripts\InstantiateInteractable.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\ReverseNormals.cs" />
     <Reference Include="Unity.Timeline.Editor">
