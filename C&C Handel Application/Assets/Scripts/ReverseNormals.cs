@@ -2,15 +2,15 @@
 using System.Collections;
 
 [RequireComponent(typeof(MeshFilter))]
-[ExecuteAlways]
 public class ReverseNormals : MonoBehaviour
 {
+
     void Start()
     {
         MeshFilter filter = GetComponent(typeof(MeshFilter)) as MeshFilter;
         if (filter != null)
         {
-            Mesh mesh = filter.sharedMesh;
+            Mesh mesh = filter.mesh;
 
             Vector3[] normals = mesh.normals;
             for (int i = 0; i < normals.Length; i++)
