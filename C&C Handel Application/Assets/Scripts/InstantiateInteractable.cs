@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class InstantiateInteractable : MonoBehaviour
 {
+   public PlayerManager playerManager;
     Camera mainCamera;
     public GameObject test;
     GameObject newObj;
+    public GameObject world;
     void Start()
     {
         mainCamera = Camera.main;
@@ -15,20 +17,24 @@ public class InstantiateInteractable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (playerManager.isDragging)
         {
-            newObj = Instantiate(test);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 10000), out RaycastHit hitInfo))
+            if (Input.GetMouseButtonDown(0))
             {
-            Debug.Log("mous");
-                Debug.Log(hitInfo.point);
-                if (hitInfo.transform.tag == "World")
+                newObj = Instantiate(test);
+                newObj.transform.parent = world.transform;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 10000), out RaycastHit hitInfo))
                 {
-                    newObj.transform.position = hitInfo.point;
+                    Debug.Log("mous");
+                    Debug.Log(hitInfo.point);
+                    if (hitInfo.transform.tag == "World")
+                    {
+                        newObj.transform.position = hitInfo.point;
+                    }
                 }
             }
         }

@@ -17,16 +17,24 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject questionObject;
 
+    public bool isDragging;
 
     void LateUpdate()
     {
-        horizontal = Input.GetAxis("Mouse X");
-        vertical = Input.GetAxis("Mouse Y");
-
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            container.Rotate(new Vector3(0, horizontal * (1), 0f) * Time.deltaTime * turnSpeedMouse);
-            transform.Rotate(new Vector3(vertical, 0, 0) * Time.deltaTime * turnSpeedMouse);
+            isDragging = !isDragging;
+        }
+        if (!isDragging)
+        {
+            horizontal = Input.GetAxis("Mouse X");
+            vertical = Input.GetAxis("Mouse Y");
+
+            if (Input.GetMouseButton(0))
+            {
+                container.Rotate(new Vector3(0, horizontal * (1), 0f) * Time.deltaTime * turnSpeedMouse);
+                transform.Rotate(new Vector3(vertical, 0, 0) * Time.deltaTime * turnSpeedMouse);
+            }
         }
     }
 
