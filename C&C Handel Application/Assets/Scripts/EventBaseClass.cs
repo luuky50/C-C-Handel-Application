@@ -6,9 +6,28 @@ public class EventBaseClass : MonoBehaviour
 {
     public delegate void EventHandler();
 
-    public event EventHandler AddMediaInteraction;
-    public void CallEventAddMediaInteraction()
+    public event EventHandler AddQuestioInteraction;
+    public event EventHandler IsPlacingObj;
+    public event EventHandler GoToNormalState;
+    public event EventHandler GoToDraggingState;
+
+    public void CallEventAddQuestionInteraction()
     {
-        AddMediaInteraction?.Invoke();
+        AddQuestioInteraction?.Invoke();
+    }
+
+    public void CallEventIsPlacingObj()
+    {
+        IsPlacingObj?.Invoke();
+    }
+
+    public void CallEventGoToNormalState()
+    {
+        GoToNormalState?.Invoke();
+    }
+
+    public void CallEventGoToDraggingState()
+    {
+        GoToDraggingState?.Invoke();
     }
 }

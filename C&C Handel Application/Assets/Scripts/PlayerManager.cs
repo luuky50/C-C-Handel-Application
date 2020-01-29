@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-
+   public  InstantiateInteractable instantiateInteractable;
     float horizontal;
     float vertical;
 
@@ -14,18 +14,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     float turnSpeedMouse;
 
-    [SerializeField]
-    private GameObject questionObject;
 
-    public bool isDragging;
 
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isDragging = !isDragging;
-        }
-        if (!isDragging)
+       
+        if (!instantiateInteractable.isDragging)
         {
             horizontal = Input.GetAxis("Mouse X");
             vertical = Input.GetAxis("Mouse Y");
