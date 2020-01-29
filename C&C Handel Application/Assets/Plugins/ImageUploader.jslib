@@ -9,15 +9,15 @@ var ImageUploaderPlugin = {
                 this.value = null;
             };
             fileInput.onchange = function (event) {
-                SendMessage('Canvas', 'FileSelected', URL.createObjectURL(event.target.files[0]));
+                SendMessage('ExternalSanvas', 'FileSelected', URL.createObjectURL(event.target.files[0]));
             }
             document.body.appendChild(fileInput);
         }
         var OpenFileDialog = function () {
             document.getElementById('ImageUploaderInput').click();
-            document.getElementById('canvas').removeEventListener('click', OpenFileDialog);
+            document.getElementById('#canvas').removeEventListener('click', OpenFileDialog);
         };
-        document.getElementById('canvas').addEventListener('click', OpenFileDialog, false);
+        document.getElementById('#canvas').addEventListener('click', OpenFileDialog, false);
     }
 };
 mergeInto(LibraryManager.library, ImageUploaderPlugin);

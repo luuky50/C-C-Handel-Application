@@ -544,6 +544,7 @@ MonoBehaviour:
   container: {fileID: 12971631}
   turnSpeedMouse: 100
   questionObject: {fileID: 0}
+  isDragging: 0
 --- !u!1 &1007360412
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +556,7 @@ GameObject:
   - component: {fileID: 1007360414}
   - component: {fileID: 1007360413}
   m_Layer: 0
-  m_Name: ExternalCanvas
+  m_Name: ExternalSanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67b9fc29f65e21469338745119f5312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _360Texture: {fileID: 2100000, guid: 784c0bb4c3676634ab18e69ff924825f, type: 2}
 --- !u!4 &1007360414
 Transform:
   m_ObjectHideFlags: 0
@@ -605,7 +607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091487551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -938,7 +940,7 @@ GameObject:
   - component: {fileID: 1836478767}
   - component: {fileID: 1836478766}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MaybeSanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
