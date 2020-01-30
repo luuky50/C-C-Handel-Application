@@ -2,5 +2,5 @@
 
 internal class LevelClass
 {
-    public List<levelScene> _Scene = new List<levelScene>();
+    public List<SceneInLevel> _Scene = new List<SceneInLevel>();
 } 

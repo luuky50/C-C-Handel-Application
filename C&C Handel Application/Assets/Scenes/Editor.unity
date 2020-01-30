@@ -169,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 784c0bb4c3676634ab18e69ff924825f, type: 2}
+  - {fileID: 2100000, guid: 27c0c81613a66ad43874e58b9ac09f97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -996,7 +996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1710125835
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1012,10 +1012,10 @@ RectTransform:
   m_Father: {fileID: 1650816980}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 524.9, y: 298.6}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.8026235, y: 0.90700006}
+  m_AnchorMax: {x: 0.9676113, y: 0.95638853}
+  m_AnchoredPosition: {x: 2.5, y: 0}
+  m_SizeDelta: {x: -3, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710125836
 MonoBehaviour:
