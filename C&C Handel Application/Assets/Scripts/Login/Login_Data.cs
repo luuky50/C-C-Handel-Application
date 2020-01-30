@@ -9,7 +9,7 @@ public class Login_Data : MonoBehaviour
     static public string Username { get; set; }
     static public string Password { get; set; }
     static public string Email { get; set; }
-
+    //Allasa
 
     void Awake()
     {
@@ -29,10 +29,7 @@ public class Login_Data : MonoBehaviour
         Username = _username;
         Password = _password;
         Email = _email;
-        if ()
-        {
 
-        }
     }
 
     
