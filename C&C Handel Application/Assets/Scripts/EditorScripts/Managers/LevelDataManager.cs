@@ -48,9 +48,11 @@ public class LevelDataManager : MonoBehaviour
         newLevel._Scene[CurrentSceneIndex].allQuestionsOfScene.Add(new QuestionInteractable());
     }
 
-    public void SetDataOfNewInteractable()
+    public void SetDataOfNewInteractable(int index)
     {
+        //if param is 0
         newLevel._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].Question = "Test";
         newLevel._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerOne = "Ans1";
     }
+
 }
