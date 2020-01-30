@@ -7,6 +7,7 @@ public class EventSubscriber : MonoBehaviour
     EventBaseClass baseClass;
     public InstantiateInteractable _instantiateClass;
     public UIManager _UIManager;
+    public LevelDataManager dataManager;
 
     private void OnEnable()
     {
@@ -22,6 +23,17 @@ public class EventSubscriber : MonoBehaviour
     {
         _instantiateClass.instantiateInteraction();
         _instantiateClass.SetPositionOfNewObj();
+
+
+        //TEMP
+        dataManager.MakeNewLevel();
+        dataManager.MakeNewDataInstanceForScene();
+        //TEMP
+
+
+        dataManager.AddDataInstanceForInteractable();
+        dataManager.SetDataOfNewInteractable();
+
     }
 
     public void baseClass_IsPlacingObj()

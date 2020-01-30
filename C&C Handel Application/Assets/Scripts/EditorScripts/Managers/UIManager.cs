@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour
     public GameObject ExitDraggingButton;
     public GameObject DragAnItem;
     public GameObject ActiveDraggingState;
-    
+    public GameObject MakeQuestionPanel
+
     public void ActivatePlacingUI()
     {
         ItemsPanel.SetActive(false);
@@ -32,5 +33,10 @@ public class UIManager : MonoBehaviour
         ExitDraggingButton.SetActive(true);
         DragAnItem.SetActive(true);
         ActiveDraggingState.SetActive(false);
+    }
+
+    public void OpenQuestion()
+    {
+        MakeQuestionPanel.SetActive(true);
     }
 }
