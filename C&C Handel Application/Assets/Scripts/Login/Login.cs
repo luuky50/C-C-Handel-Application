@@ -128,7 +128,7 @@ public class Login : MonoBehaviour
             username.GetComponent<InputField>().text = "";
             password.GetComponent<InputField>().text = "";
             Debug.Log("Login Sucessful");
-            Application.LoadLevel("Login_TestScene");
+            Application.LoadLevel("Editor");
         }
       
 
