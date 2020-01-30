@@ -13,13 +13,13 @@ public class EventSubscriber : MonoBehaviour
     {
         baseClass = GetComponent<EventBaseClass>();
 
-        baseClass.AddQuestioInteraction += baseClass_AddQuestionInteraciton;
+        baseClass.AddQuestioInteraction += baseClass_AddQuestionInteraction;
         baseClass.IsPlacingObj += baseClass_IsPlacingObj;
         baseClass.GoToNormalState += baseClass_GoToNormalView;
         baseClass.GoToDraggingState += baseClass_GoToDraggingState;
     }
 
-    public void baseClass_AddQuestionInteraciton()
+    public void baseClass_AddQuestionInteraction()
     {
         _instantiateClass.instantiateInteraction();
         _instantiateClass.SetPositionOfNewObj();
@@ -34,6 +34,12 @@ public class EventSubscriber : MonoBehaviour
         dataManager.AddDataInstanceForInteractable();
         dataManager.SetDataOfNewInteractable();
 
+        _UIManager.OpenQuestion();
+    }
+
+    public void baseClass_CompleteQuestionInteraction()
+    {
+        dataManager.SetDataOfNewInteractable(1);
     }
 
     public void baseClass_IsPlacingObj()
