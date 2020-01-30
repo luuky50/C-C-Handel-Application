@@ -21,7 +21,7 @@ public class LevelDataManager : MonoBehaviour
         {
             MakeNewDataInstanceForScene();
             AddDataInstanceForInteractable();
-            SetDataOfNewInteractable();
+           // SetDataOfNewInteractable();
         }
     }
     public void MakeNewLevel()
