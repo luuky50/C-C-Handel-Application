@@ -32,7 +32,7 @@ public class EventSubscriber : MonoBehaviour
 
 
         dataManager.AddDataInstanceForInteractable();
-        dataManager.SetDataOfNewInteractable();
+        dataManager.SetDataOfNewInteractable(1);
 
         _UIManager.OpenQuestion();
     }
