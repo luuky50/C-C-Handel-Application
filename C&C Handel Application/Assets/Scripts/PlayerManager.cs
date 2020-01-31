@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
         /*if (!instantiateInteractable.isDragging)
         {*/
             horizontal = Input.GetAxis("Mouse X");
-            vertical = Input.GetAxis("Mouse Y");
+            //vertical = Input.GetAxis("Mouse Y");
 
             if (Input.GetMouseButton(0))
             {

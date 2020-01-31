@@ -69,7 +69,7 @@ public class Login : MonoBehaviour
         Invalid_Password.SetActive(false);
 
         if (Username != "")
-        {
+        {           
             if (System.IO.File.Exists(@filePath+Username+".txt"))
             {
                 UN = true;
@@ -132,6 +132,12 @@ public class Login : MonoBehaviour
         }
       
 
+    }
+
+
+    public void TempLoginPrototype01()
+    {
+        Application.LoadLevel("Editor");
     }
 
 
