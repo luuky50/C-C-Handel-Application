@@ -9,7 +9,7 @@ public class Web : MonoBehaviour
     {
         //StartCoroutine(GetData());
         StartCoroutine(GetUsers());
-        StartCoroutine(Login("testuser", "123456"));
+        StartCoroutine(Login("Gilian", "123456"));
     }
 
     IEnumerator Login(string username, string password)
@@ -18,7 +18,7 @@ public class Web : MonoBehaviour
         form.AddField("loginUser", username);
         form.AddField("loginPass", password);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://groep03.mediaenvormgeving.nl/Login.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://groep03.mediaenvormgeving.nl/RegisterUsers.php", form))
         {
             yield return www.SendWebRequest();
 
