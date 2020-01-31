@@ -9,7 +9,6 @@ public class Login_Data : MonoBehaviour
     static public string Username { get; set; }
     static public string Password { get; set; }
     static public string Email { get; set; }
-    //Allasa
 
     void Awake()
     {
@@ -19,17 +18,13 @@ public class Login_Data : MonoBehaviour
     public void Update()
     {
         Data(Username, Password, Email);
-        //Username = _register_Script.username.ToString();
-        //Password = _register_Script.password.ToString();
-        //Email = _register_Script.email.ToString();
     }
 
     public void Data(string _username, string _password, string _email)
     {
         Username = _username;
         Password = _password;
-        Email = _email;
-
+        Email = _email;        
     }
 
     
