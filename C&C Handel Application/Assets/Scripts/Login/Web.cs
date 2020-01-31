@@ -9,27 +9,33 @@ public class Web : MonoBehaviour
     {
         //StartCoroutine(GetData());
         StartCoroutine(GetUsers());
+        StartCoroutine(Login("testuser", "123456"));
     }
 
-    //IEnumerator GetData()
-    //{
-    //    using (UnityWebRequest www = UnityWebRequest.Get("http://groep03.mediaenvormgeving.nl/GetData.php"))
-    //    {
-    //        yield return www.Send();
+    IEnumerator Login(string username, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("loginUser", username);
+        form.AddField("loginPass", password);
 
-    //        if (www.isNetworkError || www.isHttpError)
-    //        {
-    //            Debug.Log(www.error);
-    //        }
-    //        else
-    //        {
-    //            // show results as text
-    //            Debug.Log(www.downloadHandler.text);
+        using (UnityWebRequest www = UnityWebRequest.Post("http://groep03.mediaenvormgeving.nl/Login.php", form))
+        {
+            yield return www.SendWebRequest();
 
-    //            byte[] results = www.downloadHandler.data;
-    //        }
-    //    }
-    //}
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+            }
+        }
+    }
+
+
+
+
 
 
     IEnumerator GetUsers()
