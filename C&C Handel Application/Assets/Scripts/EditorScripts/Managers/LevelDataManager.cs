@@ -1,33 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelDataManager : MonoBehaviour
 {
-    List<LevelClass> allLevels = new List<LevelClass>();
-    int currentQuestionIndex = 0;
+    List<ProjectClass> allLevels = new List<ProjectClass>();
+   public int currentQuestionIndex = 0;
     int currentMediaIndex;
-    LevelClass newLevel;
-    int CurrentSceneIndex;
+    private ProjectClass newProject;
+    public int CurrentSceneIndex;
+    UIManager _UIManager;
+
+    internal ProjectClass NewProject { get => newProject; set => newProject = value; }
 
     private void Start()
     {
-        MakeNewLevel();
+        MakeNewProject();
+        _UIManager = GetComponent<UIManager>();
     }
 
-    private void Update()
+    public void MakeNewProject()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MakeNewDataInstanceForScene();
-            AddDataInstanceForInteractable();
-           // SetDataOfNewInteractable();
-        }
-    }
-    public void MakeNewLevel()
-    {
-        newLevel = new LevelClass();
-        CurrentSceneIndex = 0;            
+        NewProject = new ProjectClass();
+        CurrentSceneIndex = 0;
     }
 
     public void SetCurrentIndex(int _currentSceneIndex)
@@ -38,21 +34,40 @@ public class LevelDataManager : MonoBehaviour
     public void MakeNewDataInstanceForScene()
     {
         //if param is 0
-        newLevel._Scene.Add(new SceneInLevel());
-        CurrentSceneIndex = newLevel._Scene.Count - 1;
+        NewProject._Scene.Add(new SceneInProject());
+        CurrentSceneIndex = NewProject._Scene.Count - 1;
     }
 
     public void AddDataInstanceForInteractable()
     {
         //if param is 0
-        newLevel._Scene[CurrentSceneIndex].allQuestionsOfScene.Add(new QuestionInteractable());
+        NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene.Add(new QuestionInteractable());
     }
-
-    public void SetDataOfNewInteractable(int index)
+    private void Update()
     {
-        //if param is 0
-        newLevel._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].Question = "Test";
-        newLevel._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerOne = "Ans1";
+        Debug.Log(currentQuestionIndex + " current que index");
+    }
+    public void SetDataOfNewInteractable(int param)
+    {
+        if (param == 0)
+        {
+            NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].Question = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Question").GetComponent<InputField>().text;
+            NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerOne = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans1").GetComponent<InputField>().text;
+            NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerTwo = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans2").GetComponent<InputField>().text;
+            NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerThree = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans3").GetComponent<InputField>().text;
+        }
+        Debug.Log(currentQuestionIndex + " questionindex direct after");
+        Debug.Log(NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].Question+  " Direct after");
+    } 
+
+    public void GetDataOfGivenInteractable(int videoIndex)
+    {
+        Debug.Log(videoIndex + " videoindex");
+        Debug.Log(NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].Question + " question");
+        _UIManager.MakeQuestionPanel.gameObject.transform.Find("Question").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].Question;
+        _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans1").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].AnswerOne;
+        _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans2").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].AnswerTwo;
+        _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans3").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].AnswerThree;
     }
 
 }

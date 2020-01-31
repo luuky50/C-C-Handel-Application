@@ -5,7 +5,7 @@ using UnityEngine;
 public class EventSubscriber : MonoBehaviour
 {
     EventBaseClass baseClass;
-    public InstantiateInteractable _instantiateClass;
+    public InteractableHandler _InteractableHandler;
     public UIManager _UIManager;
     public LevelDataManager dataManager;
 
@@ -17,46 +17,65 @@ public class EventSubscriber : MonoBehaviour
         baseClass.IsPlacingObj += baseClass_IsPlacingObj;
         baseClass.GoToNormalState += baseClass_GoToNormalView;
         baseClass.GoToDraggingState += baseClass_GoToDraggingState;
+        baseClass.MakeNewProject += baseClass_MakeNewProject;
+        baseClass.CompleteQuestionInteraction += baseClass_CompleteQuestionInteraction;
+        baseClass.EditQuestion += baseClass_EditQuestion;
+    }
+
+    public void baseClass_EditQuestion()
+    {
+        dataManager.GetDataOfGivenInteractable(dataManager.currentQuestionIndex);
+        _InteractableHandler.changeIsPlacing();
+        _InteractableHandler.changeIsEditingInteractable();
+        _UIManager.OpenQuestion();
+    }
+
+    public void baseClass_MakeNewProject()
+    {
+        dataManager.MakeNewProject();
+        dataManager.MakeNewDataInstanceForScene();
     }
 
     public void baseClass_AddQuestionInteraction()
     {
-        _instantiateClass.instantiateInteraction();
-        _instantiateClass.SetPositionOfNewObj();
+        _InteractableHandler.changeIsEditingInteractable();
 
-
-        //TEMP
-        dataManager.MakeNewLevel();
-        dataManager.MakeNewDataInstanceForScene();
-        //TEMP
+        _InteractableHandler.changeIsPlacing();
 
 
         dataManager.AddDataInstanceForInteractable();
-        dataManager.SetDataOfNewInteractable(1);
+        _InteractableHandler.instantiateInteraction();
+        _InteractableHandler.SetPositionOfNewObj();
 
         _UIManager.OpenQuestion();
     }
 
     public void baseClass_CompleteQuestionInteraction()
     {
-        dataManager.SetDataOfNewInteractable(1);
+        _InteractableHandler.changeIsPlacing();
+
+        dataManager.SetDataOfNewInteractable(dataManager.currentQuestionIndex);
+
+        _UIManager.CloseQuestion();
+        _InteractableHandler.changeIsEditingInteractable();
+
     }
 
     public void baseClass_IsPlacingObj()
     {
         _UIManager.ActivatePlacingUI();
-        _instantiateClass.changeIsPlacing();
+        _InteractableHandler.changeIsPlacing();
     }
 
     public void baseClass_GoToNormalView()
     {
         _UIManager.ActivateNormalUI();
-        _instantiateClass.SetNormalStateBooleans();
+        _InteractableHandler.SetNormalStateBooleans();
     }
 
     public void baseClass_GoToDraggingState()
     {
-        _instantiateClass.changeIsDragging();
+        _InteractableHandler.changeIsDragging();
         _UIManager.ActivateDraggingUI();
     }
 }
