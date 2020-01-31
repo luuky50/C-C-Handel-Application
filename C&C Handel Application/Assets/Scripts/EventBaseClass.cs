@@ -10,6 +10,24 @@ public class EventBaseClass : MonoBehaviour
     public event EventHandler IsPlacingObj;
     public event EventHandler GoToNormalState;
     public event EventHandler GoToDraggingState;
+    public event EventHandler MakeNewProject;
+    public event EventHandler CompleteQuestionInteraction;
+    public event EventHandler EditQuestion;
+
+    public void CallEventEditQuestion()
+    {
+        EditQuestion?.Invoke();
+    }
+
+    public void CallEventCompleteQuestionInteraction()
+    {
+        CompleteQuestionInteraction?.Invoke();
+    }
+
+    public void CallEventMakeNewProject()
+    {
+        MakeNewProject?.Invoke();
+    }
 
     public void CallEventAddQuestionInteraction()
     {
