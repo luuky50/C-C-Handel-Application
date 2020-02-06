@@ -14,7 +14,7 @@ public class EventSubscriber : MonoBehaviour
         baseClass = GetComponent<EventBaseClass>();
 
         baseClass.AddQuestioInteraction += baseClass_AddQuestionInteraction;
-        baseClass.IsPlacingObj += baseClass_IsPlacingObj;
+        baseClass.IsPlacingObj += baseClass_GoToPlacingView;
         baseClass.GoToNormalState += baseClass_GoToNormalView;
         baseClass.GoToDraggingState += baseClass_GoToDraggingState;
         baseClass.MakeNewProject += baseClass_MakeNewProject;
@@ -25,9 +25,10 @@ public class EventSubscriber : MonoBehaviour
     public void baseClass_EditQuestion()
     {
         dataManager.GetDataOfGivenInteractable(dataManager.currentQuestionIndex);
-        _InteractableHandler.changeIsPlacing();
-        _InteractableHandler.changeIsEditingInteractable();
+        _InteractableHandler.changeCanPlace(false);
+        _InteractableHandler.changeIsEditingInteractable(true);
         _UIManager.OpenQuestion();
+        _UIManager.EditorPanel.SetActive(false);
     }
 
     public void baseClass_MakeNewProject()
@@ -38,44 +39,52 @@ public class EventSubscriber : MonoBehaviour
 
     public void baseClass_AddQuestionInteraction()
     {
-        _InteractableHandler.changeIsEditingInteractable();
+     //  _InteractableHandler.changeIsEditingInteractable();
 
-        _InteractableHandler.changeIsPlacing();
+       // _InteractableHandler.changeIsPlacing();
 
 
         dataManager.AddDataInstanceForInteractable();
         _InteractableHandler.instantiateInteraction();
         _InteractableHandler.SetPositionOfNewObj();
 
-        _UIManager.OpenQuestion();
+        //   _UIManager.OpenQuestion();
     }
 
     public void baseClass_CompleteQuestionInteraction()
     {
-        _InteractableHandler.changeIsPlacing();
+        _InteractableHandler.changeCanPlace(true);
+        dataManager.SetDataOfNewInteractable(0);
 
-        dataManager.SetDataOfNewInteractable(dataManager.currentQuestionIndex);
-
+        _InteractableHandler.changeIsEditingInteractable(false);
         _UIManager.CloseQuestion();
-        _InteractableHandler.changeIsEditingInteractable();
-
+        if (_InteractableHandler.isInNormalView)
+        {
+            _UIManager.ActivateNormalUI();
+        }
     }
 
-    public void baseClass_IsPlacingObj()
+    public void baseClass_GoToPlacingView()
     {
         _UIManager.ActivatePlacingUI();
-        _InteractableHandler.changeIsPlacing();
+        _InteractableHandler.changeCanPlace(true);
+        _InteractableHandler.isInNormalView = false;
     }
 
     public void baseClass_GoToNormalView()
     {
         _UIManager.ActivateNormalUI();
         _InteractableHandler.SetNormalStateBooleans();
+        _InteractableHandler.EnablePlayerManager();
+        _InteractableHandler.changeIsDragging(false);
+        _InteractableHandler.changeIsPlacing(false);
+        _InteractableHandler.changeCanPlace(false);
+        _InteractableHandler.isInNormalView = true;
     }
 
     public void baseClass_GoToDraggingState()
     {
-        _InteractableHandler.changeIsDragging();
+        _InteractableHandler.changeIsDragging(true);
         _UIManager.ActivateDraggingUI();
     }
 }

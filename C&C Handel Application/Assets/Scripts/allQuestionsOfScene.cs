@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 internal class QuestionInteractable
 {
@@ -10,5 +11,5 @@ internal class QuestionInteractable
     public string AnswerThree { get; set; }
     public string AnswerFour { get; set; }
 
-    public int GoodAnswer;
+    public List<int> goodAnswers = new List<int>();
 }

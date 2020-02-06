@@ -12,7 +12,6 @@ public class IndexInformation : MonoBehaviour
         levelData = GameObject.Find("EditorManager").GetComponent<LevelDataManager>();
         interactableHandler = GameObject.Find("EditorManager").GetComponent<InteractableHandler>();
         indexOfThisObject = levelData.NewProject._Scene[levelData.CurrentSceneIndex].allQuestionsOfScene.Count - 1;
-        Debug.Log(indexOfThisObject + " index of this obj in obj");
         interactableHandler.SetCurrentQuestionIndexWhenNewObjInstantiated(indexOfThisObject);
         
     }

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class LevelDataManager : MonoBehaviour
 {
     List<ProjectClass> allLevels = new List<ProjectClass>();
-   public int currentQuestionIndex = 0;
+    public int currentQuestionIndex = 0;
     int currentMediaIndex;
     private ProjectClass newProject;
     public int CurrentSceneIndex;
     UIManager _UIManager;
+    public List<Toggle> goodAnsSwitches = new List<Toggle>();
 
     internal ProjectClass NewProject { get => newProject; set => newProject = value; }
 
@@ -43,10 +44,7 @@ public class LevelDataManager : MonoBehaviour
         //if param is 0
         NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene.Add(new QuestionInteractable());
     }
-    private void Update()
-    {
-        Debug.Log(currentQuestionIndex + " current que index");
-    }
+
     public void SetDataOfNewInteractable(int param)
     {
         if (param == 0)
@@ -55,15 +53,28 @@ public class LevelDataManager : MonoBehaviour
             NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerOne = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans1").GetComponent<InputField>().text;
             NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerTwo = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans2").GetComponent<InputField>().text;
             NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].AnswerThree = _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans3").GetComponent<InputField>().text;
+            int i = 0;
+            foreach(Toggle item in goodAnsSwitches)
+            {
+                if (item.enabled)
+                {
+                    NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].goodAnswers.Add(i);
+                }
+                i++;
+            }
         }
-        Debug.Log(currentQuestionIndex + " questionindex direct after");
-        Debug.Log(NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].Question+  " Direct after");
-    } 
+    }
 
     public void GetDataOfGivenInteractable(int videoIndex)
     {
-        Debug.Log(videoIndex + " videoindex");
-        Debug.Log(NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].Question + " question");
+        foreach (Toggle item in goodAnsSwitches)
+        {
+            if (item.enabled)
+            {
+       //         NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[currentQuestionIndex].goodAnswers; 
+            }
+        }
+
         _UIManager.MakeQuestionPanel.gameObject.transform.Find("Question").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].Question;
         _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans1").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].AnswerOne;
         _UIManager.MakeQuestionPanel.gameObject.transform.Find("Ans2").GetComponent<InputField>().text = NewProject._Scene[CurrentSceneIndex].allQuestionsOfScene[videoIndex].AnswerTwo;

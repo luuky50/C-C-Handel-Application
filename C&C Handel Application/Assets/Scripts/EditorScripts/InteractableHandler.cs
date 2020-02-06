@@ -7,114 +7,151 @@ public class InteractableHandler : MonoBehaviour
     public UIManager _UIManager;
     public EventBaseClass eventBase;
     public PlayerManager playerManager;
-    Camera mainCamera;
-    GameObject newObj;
-    public GameObject world;
-    public bool isPlacing;
-    public GameObject[] Interactables;
-    public bool isDragging;
-    public bool isEditingInteratable;
-    //public int interactableIndex;
     public LevelDataManager levelDataManager;
+    private GameObject newObj;
+    [HideInInspector] public bool isInPlacingView;
+    [HideInInspector] public bool isEditingInteratable;
+    [HideInInspector] public bool isInDraggingState;
+    public bool canPlace;
+    private bool mouseOneClick = false;
+    [SerializeField] private GameObject world;
+    [SerializeField] private GameObject[] Interactables;
+    private Camera mainCamera;
+    private float timer;
+    private float mouseClickInterval;
+  GameObject  m_currenSelectedInteractable;
+    bool isDraggingObj;
+    public bool isInNormalView;
 
-
-    void Start()
+    private void Start()
     {
+        mouseClickInterval = 0.5f;
         mainCamera = Camera.main;
-        isPlacing = false;
-        isDragging = false;
+        isInPlacingView = false;
+        isInDraggingState = false;
         isEditingInteratable = false;
+        //    m_cameraRigidbody = mainCamera.transform.GetComponent<Rigidbody>();
+    //    eventBase.CallEventMakeNewProject();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //  Debug.Log(isDragging + " dragging");
-        //    Debug.Log(isPlacing + " placing");
-        //    Debug.Log(isEditingInteratable +" Edit");
-        if (!isDragging && !isEditingInteratable)
+        timer -= Time.deltaTime;
+        if (timer < 0)
         {
-            if (Input.GetMouseButton(0))
-            {
-                //      Debug.Log("Edit This Question");
-                if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 10000), out RaycastHit hitInfo))
-                {
-                    if (hitInfo.transform.tag == "Interactable")
-                    {
-                        //   Debug.Log(hitInfo.transform.GetComponent<IndexInformation>().indexOfThisObject + " index of this object");
-                        levelDataManager.currentQuestionIndex = hitInfo.transform.GetComponent<IndexInformation>().indexOfThisObject;
-                        eventBase.CallEventEditQuestion();
-                    }
-                }
-            }
+            mouseOneClick = false;
         }
 
-        if (isPlacing)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+
+            if (!mouseOneClick)
             {
-                if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 10000), out RaycastHit hitInfo))
-                {
-                    if (hitInfo.transform.tag == "World")
-                    {
-                        eventBase.CallEventAddQuestionInteraction();
-                        //      interactableIndex = hitInfo.transform.GetComponent<IndexInformation>();
-                        //Debug.Log(hitInfo.transform.GetComponent<IndexInformation>());
-                    }
-                }
+                timer = mouseClickInterval;
+                mouseOneClick = true;
+            }
+            else if (mouseOneClick && timer > 0)
+            {
+                checkRayCast();
+                mouseOneClick = false;
             }
         }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             eventBase.CallEventMakeNewProject();
         }
 
-        // Debug.Log(newObj.transform.GetComponent<IndexInformation>().indexOfThisObject + " index after instantiation ");
-
-        if (isDragging)
+        if (isDraggingObj)
         {
             if (Input.GetMouseButton(0))
             {
-                if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 1000), out RaycastHit hitInfo))
+                playerManager.enabled = false;
+
+                m_currenSelectedInteractable.SetActive(false);
+                if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 1000), out RaycastHit hitInfo2))
                 {
-                    if (hitInfo.transform.tag == "Interactable")
+                    if (hitInfo2.transform.tag == "World")
                     {
-                        hitInfo.transform.gameObject.SetActive(false);
-                        if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 1000), out RaycastHit hitInfo2))
-                        {
-                            if (hitInfo2.transform.tag == "World")
-                            {
-                                hitInfo.transform.position = hitInfo2.point;
-                                hitInfo.transform.gameObject.SetActive(true);
-                            }
-                        }
+                        m_currenSelectedInteractable.transform.position = hitInfo2.point;
+                        m_currenSelectedInteractable.transform.gameObject.SetActive(true);
+
                     }
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                playerManager.enabled = true;
+                isDraggingObj = false;
+            }
+        }
+    }
+
+    public void EnablePlayerManager()
+    {
+        playerManager.enabled = true;
+    }
+
+    private void checkRayCast()
+    {
+        if (Physics.Raycast(mainCamera.transform.position, GetWorldPositionOnPlane(Input.mousePosition, 10000), out RaycastHit hitInfo))
+        {
+            if (canPlace)
+            {
+                if (hitInfo.transform.tag == "World")
+                {
+                    eventBase.CallEventAddQuestionInteraction();
+
+                    return;
+                }
+            }
+
+            if (!isInDraggingState && !isEditingInteratable)
+            {
+                if (hitInfo.transform.tag == "Interactable")
+                {
+                    levelDataManager.currentQuestionIndex = hitInfo.transform.GetComponent<IndexInformation>().indexOfThisObject;
+                    eventBase.CallEventEditQuestion();
+
+                    return;
+                }
+            }
+            if (isInDraggingState)
+            {
+                if (hitInfo.transform.tag == "Interactable")
+                {
+                    m_currenSelectedInteractable = hitInfo.transform.gameObject;
+                    m_currenSelectedInteractable.SetActive(false);
+                    isDraggingObj = true;
                 }
             }
         }
     }
 
+    public void changeCanPlace(bool value)
+    {
+        canPlace = value;
+    }
+
     public void SetNormalStateBooleans()
     {
-        isPlacing = false;
-        isDragging = false;
+        isInPlacingView = false;
+        isInDraggingState = false;
     }
 
-    public void changeIsEditingInteractable()
+    public void changeIsEditingInteractable(bool value)
     {
-        isEditingInteratable = !isEditingInteratable;
+        isEditingInteratable = value;
     }
 
-    public void changeIsPlacing()
+    public void changeIsPlacing(bool value)
     {
-        isPlacing = !isPlacing;
+        isInPlacingView = value;
     }
 
-    public void changeIsDragging()
+    public void changeIsDragging(bool value)
     {
-        isDragging = !isDragging;
-        //  Debug.Log("draggingvoid");
+        isInDraggingState = value;
     }
 
     public void instantiateInteraction()
@@ -123,14 +160,11 @@ public class InteractableHandler : MonoBehaviour
         newObj.transform.parent = world.transform;
         newObj.transform.GetComponent<IndexInformation>().SetIndexOfThisObj();
     }
+
     public void SetCurrentQuestionIndexWhenNewObjInstantiated(int IndexFromTheScriptOnThePrefab)
     {
         levelDataManager.currentQuestionIndex = IndexFromTheScriptOnThePrefab;
-        //  Debug.Break();
         newObj.transform.name = "deze is de current" + IndexFromTheScriptOnThePrefab;
-        Debug.Log(IndexFromTheScriptOnThePrefab + " indexfromscriptafterprefab ");
-        // newObj.SetActive(false);
-
     }
     public void SetPositionOfNewObj()
     {
@@ -138,11 +172,9 @@ public class InteractableHandler : MonoBehaviour
         {
             if (hitInfo.transform.tag == "World")
             {
-                 newObj.transform.position = hitInfo.point;
+                newObj.transform.position = hitInfo.point;
             }
         }
-        //    Debug.Log("make a Question");
-
     }
 
 
