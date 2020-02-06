@@ -7,7 +7,7 @@ public class InteractableHandler : MonoBehaviour
     public UIManager _UIManager;
     public EventBaseClass eventBase;
     public PlayerManager playerManager;
-    public LevelDataManager levelDataManager;
+    public ProjectDataManager levelDataManager;
     private GameObject newObj;
     [HideInInspector] public bool isInPlacingView;
     [HideInInspector] public bool isEditingInteratable;
@@ -19,8 +19,8 @@ public class InteractableHandler : MonoBehaviour
     private Camera mainCamera;
     private float timer;
     private float mouseClickInterval;
-  GameObject  m_currenSelectedInteractable;
-    bool isDraggingObj;
+    private GameObject m_currenSelectedInteractable;
+    private bool isDraggingObj;
     public bool isInNormalView;
 
     private void Start()
@@ -31,7 +31,7 @@ public class InteractableHandler : MonoBehaviour
         isInDraggingState = false;
         isEditingInteratable = false;
         //    m_cameraRigidbody = mainCamera.transform.GetComponent<Rigidbody>();
-    //    eventBase.CallEventMakeNewProject();
+        //    eventBase.CallEventMakeNewProject();
 
     }
 
@@ -116,6 +116,7 @@ public class InteractableHandler : MonoBehaviour
                     return;
                 }
             }
+
             if (isInDraggingState)
             {
                 if (hitInfo.transform.tag == "Interactable")

@@ -32,17 +32,4 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    /*private void PlaceObject()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Instantiate(questionObject, new Vector3(Camera.current.pixelRect.center, 9, 9) )
-
-        }
-
-    }*/
-
-
-
-
 }

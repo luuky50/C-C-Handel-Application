@@ -7,7 +7,7 @@ public class EventSubscriber : MonoBehaviour
     EventBaseClass baseClass;
     public InteractableHandler _InteractableHandler;
     public UIManager _UIManager;
-    public LevelDataManager dataManager;
+    public ProjectDataManager dataManager;
 
     private void OnEnable()
     {
@@ -39,16 +39,9 @@ public class EventSubscriber : MonoBehaviour
 
     public void baseClass_AddQuestionInteraction()
     {
-     //  _InteractableHandler.changeIsEditingInteractable();
-
-       // _InteractableHandler.changeIsPlacing();
-
-
         dataManager.AddDataInstanceForInteractable();
         _InteractableHandler.instantiateInteraction();
         _InteractableHandler.SetPositionOfNewObj();
-
-        //   _UIManager.OpenQuestion();
     }
 
     public void baseClass_CompleteQuestionInteraction()

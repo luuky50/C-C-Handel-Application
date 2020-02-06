@@ -11,5 +11,5 @@ internal class QuestionInteractable
     public string AnswerThree { get; set; }
     public string AnswerFour { get; set; }
 
-    public List<int> goodAnswers = new List<int>();
+    public List<bool> goodAnswers = new List<bool>();
 }
