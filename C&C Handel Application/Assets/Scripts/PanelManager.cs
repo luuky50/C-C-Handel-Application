@@ -15,13 +15,13 @@ public class PanelManager : MonoBehaviour
         history = new List<Panel>();
 
         //close all panels
-        foreach (Panel p in panels)
-        {
-            p.enable(false, true);
-        }
+        //foreach (Panel p in panels)
+        //{
+        //    p.enable(false, true);
+        //}
 
         //open first panel
-        thisPanel = panels[1];
+        thisPanel = panels[0];
         switchPanel(thisPanel);
 
         if (thisPanel.background.gameObject != null)

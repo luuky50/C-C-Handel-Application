@@ -18,7 +18,7 @@ public class CanvasScript : MonoBehaviour
 
     private void Start()
     {
-        _360Object.GetComponent<VideoPlayer>();
+        //_360Object.GetComponent<VideoPlayer>();
     }
     IEnumerator LoadTexture(string url)
     {
@@ -70,4 +70,62 @@ public class CanvasScript : MonoBehaviour
         isVideo = true;
         ImageUploaderCaptureClick();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+                   ,d"=≥,.,qOp,
+                 ,7'  ''²$(  )
+                ,7'      '?q$7'
+             ..,$$,.
+   ,.  .,,--***²""²***--,,.  .,
+ ²   ,p²''              ''²q,   ²
+:  ,7'                      '7,  :
+ ' $      ,db,      ,db,      $ '
+  '$      ²$$²      ²$$²      $'    Using Reddit at school? Get an internship for Reddit.
+  '$                          $'        https://www.reddit.com/jobs
+   '$.     .,        ,.     .$'
+    'b,     '²«»«»«»²'     ,d'
+     '²?bn,,          ,,nd?²'
+       ,7$ ''²²²²²²²²'' $7,
+     ,² ²$              $² ²,
+     $  :$              $:  $
+     $   $              $   $
+     'b  q:            :p  d'
+      '²«?$.          .$?»²'
+         'b            d'
+       ,²²'?,.      .,?'²²,
+      ²==--≥²²==--==²²≤--==²* */
 }
