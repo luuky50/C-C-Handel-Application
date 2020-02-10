@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace AbstractFactory
@@ -24,21 +25,20 @@ namespace AbstractFactory
     {
         string GetProjectName(string refernceInput);
 
-        string GetProjectDescriptie();
+        string GetProjectDescriptie(string refernce_Input);
     }
 
     class ProjectA1 : IAbstractProductA
     {
-        string projectName;
-        string projectDescriptie;
+        //string projectName;
+        //string projectDescriptie;
         public string GetProjectName(string referenceInput)
         {
             return referenceInput;
         }
-        public string GetProjectDescriptie()
+        public string GetProjectDescriptie(string refernce_Input)
         {
-            Debug.Log("dfsdf");
-            return this.projectDescriptie;
+            return refernce_Input;
         }
     }
 
@@ -50,11 +50,22 @@ namespace AbstractFactory
         [SerializeField]
         private InputField descriptionField;
 
-
+        
         public void GenerateProject()
-        {
-            
+        {   
             new Client().Main(inputField.text, descriptionField.text);
+            StartCoroutine(LoadScene());
+        }
+
+        IEnumerator LoadScene()
+        {
+            yield return null;
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
+            while (!asyncOperation.isDone)
+            {
+                Debug.Log("Loading.....");
+                yield return null;
+            }
         }
     }
 
@@ -72,10 +83,13 @@ namespace AbstractFactory
             var productA = factory.CreateTestProduct_();
             //var productB = factory.CreateProductB();
             productA.GetProjectName(input1);
-            description2 = productA.GetProjectDescriptie();
+            productA.GetProjectDescriptie(description2);
 
             Debug.Log(productA.GetProjectName(input1));
-            Debug.Log(productA.GetProjectDescriptie());
+            Debug.Log(productA.GetProjectDescriptie(description2));
+
+            
+
             //Console.WriteLine(productB.AnotherUsefulFunctionB(productA));
         }
     }

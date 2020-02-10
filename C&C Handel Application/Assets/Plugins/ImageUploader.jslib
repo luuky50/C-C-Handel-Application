@@ -9,7 +9,7 @@ var ImageUploaderPlugin = {
                 this.value = null;
             };
             fileInput.onchange = function (event) {
-                SendMessage('ExternalSanvas', 'FileSelected', URL.createObjectURL(event.target.files[0]));
+                SendMessage('ExternalImage', 'FileSelected', URL.createObjectURL(event.target.files[0]));
 				console.log("The url is: " + URL.createObjectURL(event.target.files[0]));
             }
             document.body.appendChild(fileInput);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class ExternalImageLoader : MonoBehaviour
 {
@@ -13,25 +14,46 @@ public class ExternalImageLoader : MonoBehaviour
     [SerializeField]
     private bool isVideo = false;
 
+    public Texture2D texture;
+
     [SerializeField]
     private GameObject _360Object;
 
     private void Start()
     {
-        _360Object.GetComponent<VideoPlayer>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("Find Gameobject");
+        _360Object = GameObject.Find("Sphere");
+
     }
+
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Editor")
+        {
+            Debug.Log("Grabbed the fucking thing");
+            _360Object = GameObject.Find("Sphere");
+            _360Object.GetComponent<MeshRenderer>().material = _360Texture;
+            _360Texture.mainTexture = texture;
+            //projectData.Set360ImageForCurrentScene(texture);
+        }
+    }
+
+
     IEnumerator LoadTexture(string url)
     {
         WWW image = new WWW(url);
         yield return image;
-        
-        Texture2D texture = new Texture2D(1, 1);
+
+        texture = new Texture2D(1, 1);
         image.LoadImageIntoTexture(texture);
         Debug.Log("Loaded image size: " + texture.width + "x" + texture.height);
         Debug.Log("image:" + image.texture);
-        _360Texture.mainTexture = texture;
-     //   projectData.Set360ImageForCurrentScene(texture);
+        //_360Object.gameObject.GetComponent<MeshRenderer>().material.mainTexture = texture;
     }
+
+
     IEnumerator LoadVideo(string url)
     {
         WWW video = new WWW(url);
@@ -47,6 +69,7 @@ public class ExternalImageLoader : MonoBehaviour
         //newVideo.SetTargetAudioSource(0, audioSource);
 
     }
+
 
     void FileSelected(string url)
     {
