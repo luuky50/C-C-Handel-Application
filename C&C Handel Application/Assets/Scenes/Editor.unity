@@ -879,7 +879,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2138124532}
+      - m_Target: {fileID: 0}
         m_MethodName: OnButtonImageDown
         m_Mode: 1
         m_Arguments:
@@ -1020,7 +1020,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1053471733}
-        m_MethodName: ChangeSceneIndex
+        m_MethodName: SetCurrentIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2554,9 +2554,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053471731}
-  - component: {fileID: 1053471730}
   - component: {fileID: 1053471732}
   - component: {fileID: 1053471733}
+  - component: {fileID: 1053471730}
   m_Layer: 0
   m_Name: EditorManager
   m_TagString: Untagged
@@ -2573,7 +2573,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1053471729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d520703ae070c4baf2eba5a0a92fe7, type: 3}
+  m_Script: {fileID: 11500000, guid: f62fe715ab7c6e24bb06e7f2d385d62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _UIManager: {fileID: 1053471732}
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1053471729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd7371c8ca9ae47459eef310fa6b52f1, type: 3}
+  m_Script: {fileID: 11500000, guid: ec9d715fe2a37ec45918d193166ea6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentQuestionIndex: 0
@@ -5394,12 +5394,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2138124531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d67b9fc29f65e21469338745119f5312, type: 3}
+  m_Script: {fileID: 11500000, guid: e74b4f88d1cc79045835ada1d8a67c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _360Texture: {fileID: 2100000, guid: 784c0bb4c3676634ab18e69ff924825f, type: 2}
+  _360Texture: {fileID: 0}
   isVideo: 0
-  _360Object: {fileID: 54330453}
+  texture: {fileID: 0}
+  _360Object: {fileID: 0}
 --- !u!4 &2138124533
 Transform:
   m_ObjectHideFlags: 0
