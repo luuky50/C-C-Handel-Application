@@ -14,8 +14,8 @@ public class InteractableHandler : MonoBehaviour
     [HideInInspector] public bool isInDraggingState;
     public bool canPlace;
     private bool mouseOneClick = false;
-    [SerializeField] private GameObject world;
-    [SerializeField] private GameObject[] Interactables;
+    public GameObject world;
+    public GameObject[] Interactables;
     private Camera mainCamera;
     private float timer;
     private float mouseClickInterval;
@@ -84,6 +84,16 @@ public class InteractableHandler : MonoBehaviour
                 playerManager.enabled = true;
                 isDraggingObj = false;
             }
+        }
+    }
+
+    public void SetPositionOfInteractables()
+    {
+        int i = 0;
+        foreach (GameObject Item in GameObject.FindGameObjectsWithTag("Interactable"))
+        {
+            levelDataManager.NewProject._Scene[levelDataManager.CurrentSceneIndex].allQuestionsOfScene[i].positionInteractable = Item.transform.position;
+            i++;
         }
     }
 

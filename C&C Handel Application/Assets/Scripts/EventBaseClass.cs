@@ -13,6 +13,12 @@ public class EventBaseClass : MonoBehaviour
     public event EventHandler MakeNewProject;
     public event EventHandler CompleteQuestionInteraction;
     public event EventHandler EditQuestion;
+    public event EventHandler LoadScene;
+
+    public void CallEventLoadScene()
+    {
+        LoadScene?.Invoke();
+    }
 
     public void CallEventEditQuestion()
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class UIManager : MonoBehaviour
     public GameObject MakeQuestionPanel;
 
     public GameObject EditorPanel;
+    public GameObject MakeNewScenePanel;
+
+    public ProjectDataManager projectData;
+
+    public Text currentSceneText;
     public void ActivatePlacingUI()
     {
         PlaceYourItem.SetActive(true);
@@ -45,4 +51,18 @@ public class UIManager : MonoBehaviour
         ActivateNormalViewButton.SetActive(true);
     }
 
+    public void openNewScenePanel()
+    {
+        MakeNewScenePanel.SetActive(true);
+    }
+
+    public void closwNewScenePanel()
+    {
+        MakeNewScenePanel.SetActive(false);
+    }
+
+    public void SetCurrentSceneText()
+    {
+        currentSceneText.text = projectData.CurrentSceneIndex + 1.ToString();
+    }
 }

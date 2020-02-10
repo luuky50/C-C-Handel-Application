@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,26 @@ public class EventSubscriber : MonoBehaviour
         baseClass.MakeNewProject += baseClass_MakeNewProject;
         baseClass.CompleteQuestionInteraction += baseClass_CompleteQuestionInteraction;
         baseClass.EditQuestion += baseClass_EditQuestion;
+        baseClass.LoadScene += baseClass_LoadScene;
+    }
+
+    private void Update()
+    {
+        Debug.Log("current scene " + dataManager.CurrentSceneIndex);
+    }
+
+    private void baseClass_LoadScene()
+    {
+        Debug.Log(dataManager.CurrentSceneIndex + " " + dataManager.NewProject._Scene.Count);
+        if (dataManager.CurrentSceneIndex > dataManager.NewProject._Scene.Count - 1)
+        {
+
+            _UIManager.openNewScenePanel();
+            dataManager.MakeNewDataInstanceForScene();
+        }
+        Debug.Log(dataManager.CurrentSceneIndex + "rigtht after");
+        dataManager.LoadProjectScene(dataManager.CurrentSceneIndex);
+        _UIManager.SetCurrentSceneText();
     }
 
     public void baseClass_EditQuestion()
